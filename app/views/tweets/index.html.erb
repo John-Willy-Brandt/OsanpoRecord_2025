@@ -1,0 +1,6 @@
+<h1>OsanpoRecord 2025</h1>
+<p>これは Tweet 一覧ページです。</p>
+
+<% @tweets&.each do |tweet| %>
+  <p><%= tweet.subject %>（<%= tweet.activity_date %>）</p>
+<% end %>
