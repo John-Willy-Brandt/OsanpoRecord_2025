@@ -8,10 +8,10 @@
 <hr>
 
 <p>
-  カテゴリーID: <%= @tweet.category_id %><br>
-  時間ID: <%= @tweet.duration_id %><br>
-  強度ID: <%= @tweet.intensity_id %><br>
-  評価ID: <%= @tweet.rating_id %>
+  カテゴリーID: <%= @tweet.category.name %><br>
+  時間ID: <%= @tweet.duration.name %><br>
+  強度ID: <%= @tweet.intensity.name %><br>
+  評価ID: <%= @tweet.rating.name %>
 </p>
 
 <%= link_to "一覧へ戻る", tweets_path %>

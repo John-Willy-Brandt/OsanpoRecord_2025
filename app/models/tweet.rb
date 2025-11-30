@@ -1,13 +1,14 @@
 class Tweet < ApplicationRecord
-  # あとで User モデルを作ったら有効にする
-  # belongs_to :user
+  extend ActiveHash::Associations::ActiveRecordExtensions
 
-  # 簡単なバリデーション（あとで増やせます）
-  validates :subject,       presence: true
-  validates :text,          presence: true
-  validates :category_id,   presence: true
-  validates :duration_id,   presence: true
-  validates :intensity_id,  presence: true
-  validates :rating_id,     presence: true
-  validates :activity_date, presence: true
+  belongs_to :user
+
+  belongs_to :category
+  belongs_to :duration
+  belongs_to :intensity
+  belongs_to :rating
+
+  validates :subject, :text, :activity_date, presence: true
+  validates :category_id, :duration_id, :intensity_id, :rating_id,
+            numericality: { other_than: 1, message: 'を選択してください' }
 end
