@@ -10,5 +10,25 @@
           data: { confirm: "本当に削除しますか？" },
           class: "btn-delete" %>
     <% end %>
+
+      <% if user_signed_in? %>
+      <!-- ✔️ ログインしている場合 -->
+      <span class="nav-user-name">
+        ようこそ、<%= current_user.nickname %> さん
+      </span>
+
+      <%= link_to "ログアウト", destroy_user_session_path, 
+          data: { turbo_method: :delete }, 
+          class: "nav-logout" %>
+
+    <% else %>
+      <!-- ✔️ ログインしていない場合 -->
+      <%= link_to "ログイン", new_user_session_path, class: "nav-login" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "nav-signup" %>
+    <% end %>
+
+
+
+
   </div>
 </header>
