@@ -1,2 +1,45 @@
-<h1>新しいTweetを作成</h1>
-<p>ここにフォームが入ります。</p>
+<h1>新しいおさんぽ記録</h1>
+
+<%= form_with model: @tweet, local: true do |f| %>
+
+  <div>
+    <%= f.label :subject, "タイトル" %><br>
+    <%= f.text_field :subject %>
+  </div>
+
+  <div>
+    <%= f.label :activity_date, "日付" %><br>
+    <%= f.date_field :activity_date %>
+  </div>
+
+  <div>
+    <%= f.label :text, "内容" %><br>
+    <%= f.text_area :text, rows: 4 %>
+  </div>
+
+  <hr>
+
+  <div>
+    <%= f.label :category_id, "カテゴリー (仮数値入力)" %><br>
+    <%= f.number_field :category_id %>
+  </div>
+
+  <div>
+    <%= f.label :duration_id, "時間 (仮数値入力)" %><br>
+    <%= f.number_field :duration_id %>
+  </div>
+
+  <div>
+    <%= f.label :intensity_id, "強度 (仮数値入力)" %><br>
+    <%= f.number_field :intensity_id %>
+  </div>
+
+  <div>
+    <%= f.label :rating_id, "満足度 (仮数値入力)" %><br>
+    <%= f.number_field :rating_id %>
+  </div>
+
+  <%= f.submit "記録する" %>
+<% end %>
+
+<%= link_to "一覧へ戻る", tweets_path %>

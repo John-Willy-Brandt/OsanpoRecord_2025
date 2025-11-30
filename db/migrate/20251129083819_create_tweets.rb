@@ -14,4 +14,17 @@ class CreateTweets < ActiveRecord::Migration[7.1]
       t.timestamps
     end
   end
+
+  with_options presence: true do
+    validates :subject
+    validates :text
+    validates :activity_date
+    validates :category_id
+    validates :duration_id
+    validates :intensity_id
+    validates :rating_id
+    validates :user_id
+  end
+
+
 end

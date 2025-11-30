@@ -1,6 +1,11 @@
 <h1>OsanpoRecord 2025</h1>
 <p>これは Tweet 一覧ページです。</p>
 
-<% @tweets&.each do |tweet| %>
-  <p><%= tweet.subject %>（<%= tweet.activity_date %>）</p>
+<p><%= link_to "新しいおさんぽ記録を追加", new_tweet_path %></p>
+
+<% @tweets.each do |tweet| %>
+  <p>
+    <%= link_to tweet.subject, tweet_path(tweet) %>
+    （<%= tweet.activity_date %>）
+  </p>
 <% end %>
