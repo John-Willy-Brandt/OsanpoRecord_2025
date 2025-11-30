@@ -41,12 +41,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_30_030815) do
 
   create_table "tweets", charset: "utf8mb3", force: :cascade do |t|
     t.string "subject", null: false
-    t.text "text", null: false
-    t.integer "category_id", null: false
+    t.date "walked_on", null: false
     t.integer "duration_id", null: false
     t.integer "intensity_id", null: false
     t.integer "rating_id", null: false
-    t.date "activity_date", null: false
+    t.text "memo"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
