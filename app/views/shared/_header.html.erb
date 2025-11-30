@@ -1,0 +1,14 @@
+<header class="app-header">
+  <h1 class="app-title">OsanpoRecord 2025</h1>
+
+  <div class="header-actions">
+    <% if defined?(@tweet) && @tweet&.persisted? %>
+      <%= link_to "編集", edit_tweet_path(@tweet), class: "btn-edit" %>
+
+      <%= button_to "削除", tweet_path(@tweet),
+          method: :delete,
+          data: { confirm: "本当に削除しますか？" },
+          class: "btn-delete" %>
+    <% end %>
+  </div>
+</header>

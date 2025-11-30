@@ -1,6 +1,18 @@
 <h1>新しいおさんぽ記録</h1>
+<%= form_with model: @tweet, local: true, html: { multipart: true } do |f| %>
 
-<%= form_with model: @tweet, local: true do |f| %>
+ <!--写真 -->
+<div class="field">
+  <%= f.label :images, "おさんぽ写真（3枚まで）" %><br>
+
+
+
+  <%= f.file_field :images, accept: "image/*", name: "tweet[images][]" %><br>
+  <%= f.file_field :images, accept: "image/*", name: "tweet[images][]" %><br>
+  <%= f.file_field :images, accept: "image/*", name: "tweet[images][]" %><br>
+
+</div>
+
   <!-- タイトル -->
   <div class="field">
     <%= f.label :subject, "タイトル" %><br>

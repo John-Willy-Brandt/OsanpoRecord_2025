@@ -8,4 +8,18 @@
     <%= link_to tweet.subject, tweet_path(tweet) %>
     （<%= tweet.activity_date %>）
   </p>
+
+  <% if tweet.images.attached? %>
+    <div class="tweet-images">
+      <% tweet.images.first(3).each do |image| %>
+        <%= image_tag(
+              image.variant(resize_to_limit: [200, 200]).processed,
+              class: "tweet-thumbnail"
+            ) %>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No image</p>
+  <% end %>
+
 <% end %>

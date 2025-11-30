@@ -1,13 +1,11 @@
 class TweetsController < ApplicationController
-  # 一覧と詳細ページだけはログインなしで見られるようにする
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tweets = Tweet.all.order(activity_date: :desc)
+    @tweets = Tweet.order(activity_date: :desc)
   end
 
   def show
-    @tweet = Tweet.find(params[:id])
   end
 
   def new
@@ -16,24 +14,63 @@ class TweetsController < ApplicationController
 
   def create
     @tweet = Tweet.new(tweet_params)
+    @tweet.user = current_user
+
     if @tweet.save
-      redirect_to tweets_path, notice: "おさんぽ記録を保存しました。"
+      redirect_to tweets_path
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+  def edit
+  end
+
+def update
+  # ① チェックがついた画像を削除
+  if params[:tweet][:remove_image_ids].present?
+    params[:tweet][:remove_image_ids].each do |attachment_id|
+      @tweet.images.find(attachment_id).purge
+    end
+  end
+
+  # ② 新しくアップロードされた画像があれば「追加」で attach
+  if params[:tweet][:images].present?
+    params[:tweet][:images].each do |image|
+      @tweet.images.attach(image)
+    end
+  end
+
+  # ③ それ以外の属性（subject, text など）だけ更新する
+  #    images はここで扱わないようにするのがポイント！
+  if @tweet.update(tweet_params.except(:images))
+    redirect_to tweet_path(@tweet), notice: "更新しました"
+  else
+    render :edit, status: :unprocessable_entity
+  end
+end
+
+  def destroy
+    @tweet.destroy
+    redirect_to tweets_path, notice: "削除しました"
+  end
+
   private
+
+  def set_tweet
+    @tweet = Tweet.find(params[:id])
+  end
 
   def tweet_params
     params.require(:tweet).permit(
       :subject,
+      :activity_date,
       :text,
       :category_id,
       :duration_id,
       :intensity_id,
       :rating_id,
-      :activity_date
-    ).merge(user_id: current_user.id)
+      images: []
+    )
   end
 end

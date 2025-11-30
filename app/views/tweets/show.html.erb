@@ -1,5 +1,13 @@
 <h1><%= @tweet.subject %></h1>
 
+<% if @tweet.images.attached? %>
+  <div>
+<% @tweet.images.first(3).each do |image| %>
+   <%= image_tag image.variant(resize_to_limit: [400, 400]).processed %>
+<% end %>
+  </div>
+<% end %>
+
 <p>日付: <%= @tweet.activity_date %></p>
 
 <p>内容：</p>
