@@ -1,0 +1,36 @@
+<header class="app-header">
+  <%= link_to root_path do %>
+    <%= image_tag "osanporecord2025-1.png", class: "osanpo-logo" %>
+  <% end %>
+
+  <div class="header-actions">
+    <% if user_signed_in? %>
+      <!-- ✔️ ログインしている場合：ユーザー名、マイページ、ログアウト -->
+      <span class="nav-user-name">
+        ようこそ、<%= current_user.nickname %> さん
+      </span>
+
+      <%= link_to "マイページ", mypage_path, class: "btn btn-primary nav-mypage" %>
+
+      <%= link_to "ログアウト",
+                  destroy_user_session_path,
+                  data: { turbo_method: :delete },
+                  class: "btn btn-delete nav-logout" %>
+
+    <% else %>
+      <!-- ✔️ 未ログインの場合 -->
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary nav-login" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "btn nav-signup" %>
+    <% end %>
+
+    <%# ✔️ もし show のときは編集・削除を出す %>
+    <% if defined?(@tweet) && @tweet&.persisted? %>
+      <%= link_to "編集", edit_tweet_path(@tweet), class: "btn-edit" %>
+
+      <%= button_to "削除", tweet_path(@tweet),
+                    method: :delete,
+                    data: { confirm: "本当に削除しますか？" },
+                    class: "btn-delete" %>
+    <% end %>
+  </div>
+</header>

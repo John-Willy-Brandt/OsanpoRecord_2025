@@ -1,0 +1,32 @@
+<h2 class="page-title">おさんぽ記録 一覧</h2>
+<p class="page-subtitle">過去のおさんぽの記録が新しい順に並びます。</p>
+
+<p>
+  <%= link_to "＋ 新しいおさんぽ記録を追加", new_tweet_path, class: "btn btn-primary" %>
+</p>
+
+<div class="tweet-list">
+  <% @tweets.each do |tweet| %>
+    <article class="tweet-card">
+      <div class="tweet-main">
+        <%= link_to tweet.subject, tweet_path(tweet), class: "tweet-title-link" %>
+        <p class="tweet-meta">日付：<%= tweet.activity_date %></p>
+      </div>
+
+      <% if tweet.images.attached? %>
+        <div class="tweet-images">
+          <% tweet.images.first(3).each do |image| %>
+            <%= image_tag(
+                  image.variant(resize_to_limit: [200, 200]).processed,
+                  class: "tweet-thumbnail"
+                ) %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="tweet-images">
+          <span class="tweet-meta">写真なし</span>
+        </div>
+      <% end %>
+    </article>
+  <% end %>
+</div>

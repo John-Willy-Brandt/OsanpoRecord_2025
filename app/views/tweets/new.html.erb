@@ -1,0 +1,63 @@
+<h1>新しいおさんぽ記録</h1>
+<%= form_with model: @tweet, local: true, html: { multipart: true } do |f| %>
+
+ <!--写真 -->
+<div class="field">
+  <%= f.label :images, "おさんぽ写真（3枚まで）" %><br>
+
+
+
+  <%= f.file_field :images, accept: "image/*", name: "tweet[images][]" %><br>
+  <%= f.file_field :images, accept: "image/*", name: "tweet[images][]" %><br>
+  <%= f.file_field :images, accept: "image/*", name: "tweet[images][]" %><br>
+
+</div>
+
+  <!-- タイトル -->
+  <div class="field">
+    <%= f.label :subject, "タイトル" %><br>
+    <%= f.text_field :subject %>
+  </div>
+
+  <!-- 日付 -->
+  <div class="field">
+    <%= f.label :activity_date, "日付" %><br>
+    <%= f.date_field :activity_date %>
+  </div>
+
+  <!-- 内容 -->
+  <div class="field">
+    <%= f.label :text, "内容" %><br>
+    <%= f.text_area :text, rows: 4 %>
+  </div>
+
+  <!-- カテゴリー -->
+  <div class="field">
+    <%= f.label :category_id, "カテゴリー" %><br>
+    <%= f.collection_select :category_id, Category.all, :id, :name %>
+  </div>
+
+  <!-- 時間 -->
+  <div class="field">
+    <%= f.label :duration_id, "時間" %><br>
+    <%= f.collection_select :duration_id, Duration.all, :id, :name %>
+  </div>
+
+  <!-- 強度 -->
+  <div class="field">
+    <%= f.label :intensity_id, "強度" %><br>
+    <%= f.collection_select :intensity_id, Intensity.all, :id, :name %>
+  </div>
+
+  <!-- 気分 -->
+  <div class="field">
+    <%= f.label :rating_id, "気分" %><br>
+    <%= f.collection_select :rating_id, Rating.all, :id, :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "記録する" %>
+  </div>
+<% end %>
+
+<%= link_to "一覧へ戻る", tweets_path %>

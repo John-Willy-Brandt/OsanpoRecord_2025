@@ -1,0 +1,53 @@
+<h2 class="page-title">マイページ</h2>
+<p class="page-subtitle">
+  <%= current_user.nickname %> さんのおさんぽ記録
+</p>
+
+<h3>おさんぽ記録一覧</h3>
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li>
+      <%= tweet.activity_date %> :
+      <%= link_to tweet.subject, tweet_path(tweet) %>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<h3>おさんぽカレンダー</h3>
+
+<%# 今月のカレンダー例（本格的にするなら後で強化） %>
+<% require "date" %>
+<% today = Date.current %>
+<% first = today.beginning_of_month %>
+<% last  = today.end_of_month %>
+
+<table border="1">
+  <tr>
+    <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
+  </tr>
+
+  <% week = [] %>
+  <% (first..last).each do |date| %>
+    <% week << date %>
+    <% if date.wday == 6 || date == last %>
+      <tr>
+        <% week.each do |d| %>
+          <% has_activity = @activity_dates.include?(d) %>
+          <td style="<%= 'background:#ffeaa7;' if has_activity %>">
+            <%= d.day %>
+            <% if has_activity %>
+              <br>
+              🔵
+            <% end %>
+          </td>
+        <% end %>
+        <% (7 - week.size).times do %>
+          <td></td>
+        <% end %>
+      </tr>
+      <% week = [] %>
+    <% end %>
+  <% end %>
+</table>
