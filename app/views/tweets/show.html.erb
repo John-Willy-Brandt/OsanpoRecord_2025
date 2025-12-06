@@ -2,25 +2,50 @@
 <h2>投稿者：<%= @tweet.user.nickname %></h2>
 
 <% if @tweet.images.attached? %>
-  <div>
-<% @tweet.images.first(3).each do |image| %>
-   <%= image_tag image.variant(resize_to_limit: [400, 400]).processed %>
-<% end %>
+  <div class="tweet-images">
+    <% @tweet.images.first(3).each do |image| %>
+      <%= image_tag image.variant(resize_to_limit: [400, 400]).processed, class: "tweet-image" %>
+    <% end %>
   </div>
 <% end %>
 
 <p>日付: <%= @tweet.activity_date %></p>
 
-<p>内容：</p>
+<h3>内容</h3>
 <p><%= simple_format(@tweet.text) %></p>
 
 <hr>
 
 <p>
-  カテゴリーID: <%= @tweet.category.name %><br>
-  時間ID: <%= @tweet.duration.name %><br>
-  強度ID: <%= @tweet.intensity.name %><br>
-  評価ID: <%= @tweet.rating.name %>
+  カテゴリー：<%= @tweet.category.name %><br>
+  時間：<%= @tweet.duration.name %><br>
+  強度：<%= @tweet.intensity.name %><br>
+  評価：<%= @tweet.rating.name %>
 </p>
 
+<hr>
+
+<div class="comment-form">
+   <% if user_signed_in? && @tweet.user_id != current_user.id %>
+    <%= form_with(model: [@tweet, @comment], local: true) do |form| %>
+      <%= form.text_area :text, placeholder: "コメントする", rows: 2, class: "comment-textarea" %>
+      <%= form.submit "SEND", class: "comment-submit" %>
+    <% end %>
+  <% else %>
+    <strong>※ コメントの投稿には新規登録 / ログインが必要です ※</strong>
+  <% end %>
+</div>
+
+<div class="comments">
+  <h4>＜コメント一覧＞</h4>
+  <% @comments.each do |comment| %>
+    <p class="comment-item">
+      <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
+      <%= comment.text %>
+    </p>
+  <% end %>
+</div>
+
+
 <%= link_to "一覧へ戻る", tweets_path %>
+</div>

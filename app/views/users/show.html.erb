@@ -1,0 +1,23 @@
+<h2><%= @user.nickname %> さんのページ</h2>
+
+<h3>おさんぽ記録一覧</h3>
+<ul class="user-tweets">
+  <% @tweets.each do |tweet| %>
+    <li class="user-tweet">
+      <div class="tweet-images">
+        <% if tweet.images.attached? %>
+          <% tweet.images.each do |image| %>
+            <%= image_tag image.variant(resize_to_limit: [300, 300]),
+                          class: "tweet-image" %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="tweet-body">
+        <strong><%= link_to tweet.subject, tweet_path(tweet) %></strong><br>
+        日付: <%= tweet.activity_date %><br>
+        内容: <%= tweet.text %>
+      </div>
+    </li>
+  <% end %>
+</ul>

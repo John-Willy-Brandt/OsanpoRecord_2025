@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  get 'mypages/show'
   devise_for :users
-  root "tweets#index"
-  get "mypage", to: "mypages#show"
-  resources :tweets
+
+  root 'tweets#index'
+
+  # マイページ（自分専用ページ）へのショートカット
+  get 'mypage', to: 'mypages#show', as: :mypage
+
+  # ★ ユーザー個別ページ（/users/:id）
+  resources :users, only: :show
+
+  resources :tweets do
+    resources :comments, only: :create
+  end
 end

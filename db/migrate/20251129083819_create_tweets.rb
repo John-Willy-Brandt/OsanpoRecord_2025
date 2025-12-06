@@ -5,9 +5,9 @@ class CreateTweets < ActiveRecord::Migration[7.1]
       t.date    :walked_on,   null: false
       t.integer :duration_id, null: false
       t.integer :intensity_id, null: false
-      t.integer :rating_id,   null: false
+      t.integer :rating_id, null: false
       t.text    :memo
-      t.references :user, null: false #, foreign_key: true
+      t.references :user, null: false # , foreign_key: true
 
       t.timestamps
     end

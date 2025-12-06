@@ -1,0 +1,223 @@
+.app-footer {
+  margin-top: 40px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ここから cute1 デザイン */
+.footer--cute1 {
+  background: #fffdf8;
+  border-top: 2px solid #ffe1b5;
+  color: #555;
+}
+
+.footer--cute1 .footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 18px 16px 14px;
+  text-align: center;
+  position: relative;
+}
+
+/* 足あとのライン（上部） */
+.footer--cute1 .footer-inner::before {
+  content: "🐾  🐾  🐾  🐾  🐾";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.footer--cute1 .footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer--cute1 .footer-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #ff8c6a;
+}
+
+.footer--cute1 .footer-subtitle {
+  font-size: 11px;
+  color: #999;
+}
+
+.footer--cute1 .footer-nav {
+  margin: 10px 0 6px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer--cute1 .footer-nav a {
+  font-size: 13px;
+  text-decoration: none;
+  color: #555;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #fff7e7;
+  border: 1px solid #ffe1b5;
+}
+
+.footer--cute1 .footer-nav a:hover {
+  background: #ffe9c8;
+}
+
+.footer--cute1 .footer-copy {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* ここから cute2 デザイン */
+.footer--cute2 {
+  background: linear-gradient(180deg, #f6f9ff 0%, #f0f4ff 35%, #ffffff 100%);
+  padding: 24px 0;
+}
+
+.footer--cute2 .footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 14px 18px 10px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(120, 140, 200, 0.18);
+  text-align: center;
+}
+
+.footer--cute2 .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+}
+
+.footer--cute2 .footer-title {
+  font-weight: 700;
+  font-size: 17px;
+  color: #4c6fff;
+}
+
+.footer--cute2 .footer-subtitle {
+  font-size: 11px;
+  color: #8a96c2;
+}
+
+/* ナビ部分を丸ボタン風に */
+.footer--cute2 .footer-nav {
+  margin: 12px 0 8px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer--cute2 .footer-nav a {
+  font-size: 12px;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #f4f7ff;
+  color: #4c5b8f;
+  border: 1px solid #dde5ff;
+}
+
+.footer--cute2 .footer-nav a:hover {
+  background: #e4ebff;
+}
+
+/* コピーライト */
+.footer--cute2 .footer-copy {
+  font-size: 11px;
+  color: #9ca3c7;
+}
+
+/* ちょっとした足跡アイコン */
+.footer--cute2 .footer-copy::before {
+  content: "🐾 ";
+}
+
+/* ここから cute3 デザイン */
+.footer--cute3 {
+  background: radial-gradient(circle at 10% 0%, #4451a8 0, #1c2350 55%, #151832 100%);
+  color: #f4f7ff;
+  padding: 20px 0 18px;
+}
+
+.footer--cute3 .footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: center;
+  position: relative;
+}
+
+/* 星空っぽいキラキラ */
+.footer--cute3 .footer-inner::before {
+  content: "✦  ✧  ✦  ✧  ✦";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  opacity: 0.8;
+  color: #f9f0ff;
+}
+
+.footer--cute3 .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+}
+
+.footer--cute3 .footer-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffeec2;
+}
+
+.footer--cute3 .footer-subtitle {
+  font-size: 11px;
+  color: #d4d8ff;
+}
+
+/* ナビ：半透明のピルボタン */
+.footer--cute3 .footer-nav {
+  margin: 12px 0 8px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer--cute3 .footer-nav a {
+  font-size: 12px;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(19, 29, 70, 0.7);
+  color: #f6f3ff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer--cute3 .footer-nav a:hover {
+  background: rgba(55, 69, 130, 0.9);
+}
+
+/* 足あと＋コピーライト */
+.footer--cute3 .footer-copy {
+  font-size: 11px;
+  color: #cfd5ff;
+  margin-top: 4px;
+}
+
+.footer--cute3 .footer-copy::before {
+  content: "🐾 ";
+}

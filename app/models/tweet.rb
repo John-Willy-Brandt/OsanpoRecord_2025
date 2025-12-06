@@ -9,6 +9,7 @@ class Tweet < ApplicationRecord
   belongs_to :rating
 
   has_many_attached :images
+  has_many :comments
 
   validates :subject, :text, :activity_date, presence: true
   validates :category_id, :duration_id, :intensity_id, :rating_id,

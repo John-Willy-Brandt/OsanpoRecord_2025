@@ -349,3 +349,58 @@
 .link-back {
   font-size: 0.9rem;
 }
+
+.tweet-images {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tweet-image {
+  border-radius: 8px;
+}
+
+.comment-form {
+  margin-top: 20px;
+}
+
+.comment-textarea {
+  width: 100%;
+  padding: 10px;
+}
+
+.comment-submit {
+  margin-top: 8px;
+  padding: 6px 14px;
+}
+
+.comments {
+  margin-top: 30px;
+}
+
+.comment-item {
+  margin-bottom: 10px;
+}
+
+.user-tweets {
+  list-style: none;
+  padding: 0;
+}
+
+.user-tweet {
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 12px;
+}
+
+.tweet-images {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tweet-image {
+  max-width: 150px;
+  height: auto;
+  border-radius: 8px;
+}
