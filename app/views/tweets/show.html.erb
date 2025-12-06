@@ -4,7 +4,15 @@
 <% if @tweet.images.attached? %>
   <div class="tweet-images">
     <% @tweet.images.first(3).each do |image| %>
+
+    <%# 古いサーバー上にしかなかった画像は、いまのサーバーには無いのでスキップ %>
+    <% begin %>
+
       <%= image_tag image.variant(resize_to_limit: [400, 400]).processed, class: "tweet-image" %>
+
+    <% rescue ActiveStorage::FileNotFoundError %>
+    <% end %>
+     <%# 古いサーバー上にしかなかった画像は、いまのサーバーには無いのでスキップ %>
     <% end %>
   </div>
 <% end %>

@@ -7,8 +7,19 @@
       <div class="tweet-images">
         <% if tweet.images.attached? %>
           <% tweet.images.each do |image| %>
+
+    <%# 古いサーバー上にしかなかった画像は、いまのサーバーには無いのでスキップ %>
+    <% begin %>
+
+
             <%= image_tag image.variant(resize_to_limit: [300, 300]),
                           class: "tweet-image" %>
+
+  <% rescue ActiveStorage::FileNotFoundError %>
+    <% end %>
+     <%# 古いサーバー上にしかなかった画像は、いまのサーバーには無いのでスキップ %>
+
+
           <% end %>
         <% end %>
       </div>
