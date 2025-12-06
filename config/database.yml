@@ -2,21 +2,25 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+
 development:
   <<: *default
   adapter: mysql2
   username: root
-  password:
+  password: password
   host: localhost
+  socket: /var/run/mysqld/mysqld.sock
   database: OsanpoRecord_2025_development
 
 test:
   <<: *default
   adapter: mysql2
   username: root
-  password:
+  password: password
   host: localhost
+  socket: /var/run/mysqld/mysqld.sock
   database: OsanpoRecord_2025_rails7_test
+
 
 production:
   <<: *default

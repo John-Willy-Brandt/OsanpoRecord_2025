@@ -66,8 +66,8 @@
 }
 
 .btn-edit {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  background: rgba(255, 59, 48, 0.9);
+  color: #eeeff0;
 }
 
 .btn-delete {
@@ -217,4 +217,135 @@
   height: 100px;
   width: auto;
   display: block;
+}
+
+.tweet-meta-own {
+  font-size: 1.5rem; /* 大きくする */
+  font-weight: bold;
+}
+
+.mypage-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.mypage-header {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.mypage-header .page-title {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.mypage-header .page-subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.mypage-stats {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.mypage-new-btn {
+  margin-top: 4px;
+}
+
+/* 2カラム */
+.mypage-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.mypage-left,
+.mypage-right {
+  flex: 1 1 300px;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+/* おさんぽ一覧 */
+.mypage-tweet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+}
+
+.mypage-tweet-item {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.mypage-tweet-item .tweet-date {
+  font-size: 0.85rem;
+  color: #888;
+  margin-right: 8px;
+}
+
+.mypage-tweet-item .tweet-link {
+  font-size: 0.95rem;
+}
+
+/* カレンダー */
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  table-layout: fixed;
+}
+
+.calendar th,
+.calendar td {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 4px;
+  height: 56px;
+  vertical-align: top;
+  font-size: 0.85rem;
+}
+
+.calendar th {
+  background: #f7f7f7;
+  font-weight: bold;
+}
+
+.calendar-day.empty {
+  background: #fafafa;
+}
+
+.calendar-day .day-number {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.calendar-day.has-activity {
+  background: #ffeaa7; /* おさんぽした日をハイライト */
+}
+
+.calendar-day.today {
+  outline: 2px solid #0984e3;
+}
+
+.calendar-day .day-dot {
+  font-size: 1rem;
+  margin-top: 2px;
+}
+
+/* 戻るリンク */
+.mypage-footer-link {
+  margin-top: 24px;
+  text-align: right;
+}
+
+.link-back {
+  font-size: 0.9rem;
 }

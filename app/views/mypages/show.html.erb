@@ -1,53 +1,106 @@
-<h2 class="page-title">マイページ</h2>
-<p class="page-subtitle">
-  <%= current_user.nickname %> さんのおさんぽ記録
-</p>
+<div class="mypage-container">
+  <!-- 上部プロフィールエリア -->
+  <section class="mypage-header">
+    <h2 class="page-title">マイページ</h2>
+    <p class="page-subtitle">
+      🐾 <strong><%= current_user.nickname %></strong> さんのおさんぽ記録
+    </p>
 
-<h3>おさんぽ記録一覧</h3>
-<ul>
-  <% @tweets.each do |tweet| %>
-    <li>
-      <%= tweet.activity_date %> :
-      <%= link_to tweet.subject, tweet_path(tweet) %>
-    </li>
-  <% end %>
-</ul>
+    <p class="mypage-stats">
+      これまでのおさんぽ記録：
+      <strong><%= @tweets.count %>件</strong>
+    </p>
 
-<hr>
+    <%= link_to "＋ 新しいおさんぽ記録を追加",
+                new_tweet_path,
+                class: "btn btn-primary mypage-new-btn" %>
+  </section>
 
-<h3>おさんぽカレンダー</h3>
+  <div class="mypage-main">
+    <!-- 左：最近のおさんぽ一覧 -->
+    <section class="mypage-left">
+      <h3 class="section-title">最近のおさんぽ</h3>
 
-<%# 今月のカレンダー例（本格的にするなら後で強化） %>
-<% require "date" %>
-<% today = Date.current %>
-<% first = today.beginning_of_month %>
-<% last  = today.end_of_month %>
+      <ul class="mypage-tweet-list">
+        <% @tweets.first(10).each do |tweet| %>
+          <li class="mypage-tweet-item">
+            <span class="tweet-date">
+              <%= tweet.activity_date&.strftime("%Y-%m-%d") %>
+            </span>
+            <%= link_to tweet.subject, tweet_path(tweet), class: "tweet-link" %>
+          </li>
+        <% end %>
+      </ul>
 
-<table border="1">
-  <tr>
-    <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
-  </tr>
+      <%= link_to "▶ すべてのおさんぽ記録を見る",
+                  tweets_path,
+                  class: "link-all-tweets" %>
+    </section>
 
-  <% week = [] %>
-  <% (first..last).each do |date| %>
-    <% week << date %>
-    <% if date.wday == 6 || date == last %>
-      <tr>
-        <% week.each do |d| %>
-          <% has_activity = @activity_dates.include?(d) %>
-          <td style="<%= 'background:#ffeaa7;' if has_activity %>">
-            <%= d.day %>
-            <% if has_activity %>
-              <br>
-              🔵
+    <!-- 右：おさんぽカレンダー -->
+    <section class="mypage-right">
+      <h3 class="section-title">おさんぽカレンダー</h3>
+
+      <%# Date.current は Rails が読み込んでくれているので require は不要 %>
+ <% today  = Date.current %>
+<% first  = today.beginning_of_month %>
+<% last   = today.end_of_month %>
+
+<table class="calendar">
+  <thead>
+    <tr>
+      <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% week = [] %>
+
+    <% first.wday.times { week << nil } %>
+
+    <% (first..last).each do |date| %>
+      <% week << date %>
+
+      <% if date.wday == 6 || date == last %>
+        <tr>
+          <% week.each do |d| %>
+            <% if d.nil? %>
+              <td class="calendar-day empty"></td>
+            <% else %>
+              <% tweets_for_day = (@tweets_by_date[d] || []) %>
+              <% has_activity   = tweets_for_day.any? %>
+              <% thumb_tweet    = tweets_for_day.find { |t| t.images.attached? } %>
+
+              <td class="calendar-day
+                         <%= 'has-activity' if has_activity %>
+                         <%= 'today' if d == today %>">
+                <div class="day-number"><%= d.day %></div>
+
+                <% if thumb_tweet.present? %>
+                  <div class="day-image">
+                    <%= image_tag(
+                          thumb_tweet.images.first
+                                     .variant(resize_to_limit: [60, 60])
+                                     .processed,
+                          class: "calendar-thumb"
+                        ) %>
+                  </div>
+                <% elsif has_activity %>
+                  <div class="day-dot">🔵</div>
+                <% end %>
+              </td>
             <% end %>
-          </td>
-        <% end %>
-        <% (7 - week.size).times do %>
-          <td></td>
-        <% end %>
-      </tr>
-      <% week = [] %>
+          <% end %>
+
+          <% week = [] %>
+        </tr>
+      <% end %>
     <% end %>
-  <% end %>
+  </tbody>
 </table>
+    </section>
+  </div>
+
+  <div class="mypage-footer-link">
+    <%= link_to "一覧へ戻る", tweets_path, class: "link-back" %>
+  </div>
+</div>

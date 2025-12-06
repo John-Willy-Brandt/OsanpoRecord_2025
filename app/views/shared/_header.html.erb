@@ -24,7 +24,9 @@
     <% end %>
 
     <%# ✔️ もし show のときは編集・削除を出す %>
-    <% if defined?(@tweet) && @tweet&.persisted? %>
+    <% if defined?(@tweet) && @tweet&.persisted? && @tweet.user_id == current_user.id %>
+
+
       <%= link_to "編集", edit_tweet_path(@tweet), class: "btn-edit" %>
 
       <%= button_to "削除", tweet_path(@tweet),

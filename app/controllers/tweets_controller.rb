@@ -1,5 +1,14 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_tweet!, only: [:edit, :update, :destroy]
+
+def authorize_tweet!
+  return if @tweet.user == current_user
+  redirect_to root_path, alert: "自分の投稿だけ編集・削除できます。"
+end
+
+
+
 
   def index
     @tweets = Tweet.order(activity_date: :desc)

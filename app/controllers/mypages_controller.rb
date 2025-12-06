@@ -1,13 +1,18 @@
 class MypagesController < ApplicationController
-  before_action :authenticate_user!   # ログインしていない人はマイページを見られない
+  before_action :authenticate_user!
 
   def show
     @user = current_user
 
-    # ログインユーザーのツイートだけ全部取得（古い順 or 新しい順はお好みで）
-    @tweets = @user.tweets.order(activity_date: :asc)
+    # ログインユーザーのツイート（画像付きもまとめて読み込む）
+    @tweets = @user.tweets
+                   .with_attached_images
+                   .order(activity_date: :asc)
 
-    # カレンダー用に日付だけの配列を持っておく
-    @activity_dates = @tweets.pluck(:activity_date)
+    # ✅ 日付ごとにツイートをまとめる（カレンダー用）
+    @tweets_by_date = @tweets.group_by { |t| t.activity_date.to_date }
+
+    # ✅ おさんぽした日付の一覧（背景色やマーク用）
+    @activity_dates = @tweets_by_date.keys
   end
 end
