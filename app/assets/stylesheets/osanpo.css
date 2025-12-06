@@ -1,9 +1,11 @@
-/* 全体レイアウト */
+/* ==========================
+   全体レイアウト（cute1 トーン）
+   ========================== */
 .app-body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f5f5f7;
-  color: #333;
+  background: #fffaf4; /* ほんのりクリーム色 */
+  color: #444;
 }
 
 .app-main {
@@ -14,20 +16,35 @@
   max-width: 900px;
   margin: 0 auto;
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 24px 24px 32px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid #ffe4c4;
+  box-shadow: 0 8px 24px rgba(255, 182, 119, 0.16);
 }
 
-/* ヘッダー */
+/* ==========================
+   ヘッダー（やさしいグラデーション）
+   ========================== */
 .app-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #5ac8fa, #34c759);
-  color: #fff;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #ffd9b3, #ffc0cb); /* パステルオレンジ×ピンク */
+  color: #5a3b36;
+  box-shadow: 0 4px 14px rgba(255, 166, 158, 0.35);
+  position: relative;
+}
+
+/* 足あとの飾り（ヘッダー上部） */
+.app-header::before {
+  content: "🐾  🐾  🐾";
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  opacity: 0.85;
 }
 
 .app-header .app-title {
@@ -36,6 +53,14 @@
   letter-spacing: 0.03em;
 }
 
+/* ロゴ */
+.osanpo-logo {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+/* ヘッダー右側 */
 .header-actions {
   display: flex;
   gap: 8px;
@@ -46,13 +71,36 @@
   margin: 0;
 }
 
-/* ボタン共通 */
+.nav-user-name {
+  margin-right: 12px;
+  font-weight: bold;
+  color: #5a3b36;
+}
+
+.nav-login,
+.nav-signup,
+.nav-logout {
+  margin-left: 10px;
+  color: #ff8c6a;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.nav-login:hover,
+.nav-signup:hover,
+.nav-logout:hover {
+  text-decoration: underline;
+}
+
+/* ==========================
+   ボタン（丸くてかわいい）
+   ========================== */
 .btn,
 .btn-edit,
 .btn-delete {
   display: inline-block;
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: 999px;
   font-size: 13px;
   border: none;
   cursor: pointer;
@@ -60,42 +108,51 @@
   transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.15s ease;
 }
 
+/* メインボタン（投稿など） */
 .btn-primary {
-  background: #007aff;
-  color: #fff;
+  background: #ff8c6a;
+  color: #fffdf8;
+  box-shadow: 0 3px 8px rgba(255, 140, 106, 0.4);
 }
 
+/* 編集ボタン（優しいピンク） */
 .btn-edit {
-  background: rgba(255, 59, 48, 0.9);
-  color: #eeeff0;
+  background: #ffb3c1;
+  color: #5a3b36;
 }
 
+/* 削除ボタン（少しだけ強め） */
 .btn-delete {
-  background: rgba(255, 59, 48, 0.9);
-  color: #fff;
+  background: #ff6b81;
+  color: #fff9f9;
 }
 
 .btn:hover,
 .btn-edit:hover,
 .btn-delete:hover {
   transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 8px rgba(255, 140, 106, 0.35);
 }
 
-/* ページタイトル */
+/* ==========================
+   ページタイトル
+   ========================== */
 .page-title {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 8px;
+  color: #ff8c6a;
 }
 
 .page-subtitle {
   font-size: 13px;
-  color: #777;
+  color: #888;
   margin-bottom: 16px;
 }
 
-/* 一覧リスト */
+/* ==========================
+   一覧リスト（カード）
+   ========================== */
 .tweet-list {
   margin-top: 16px;
   display: flex;
@@ -104,10 +161,10 @@
 }
 
 .tweet-card {
-  border-radius: 10px;
+  border-radius: 14px;
   padding: 12px 14px;
-  border: 1px solid #eee;
-  background: #fafafa;
+  border: 1px solid #ffe7c9;
+  background: #fffaf4;
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.3fr);
   gap: 10px;
@@ -122,7 +179,7 @@
 .tweet-title-link {
   font-weight: 600;
   text-decoration: none;
-  color: #333;
+  color: #553628;
 }
 
 .tweet-title-link:hover {
@@ -131,23 +188,40 @@
 
 .tweet-meta {
   font-size: 12px;
-  color: #999;
+  color: #aa8f7e;
 }
 
+.tweet-meta-own {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ff8c6a;
+}
+
+/* 画像サムネイル */
 .tweet-images {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   justify-content: flex-end;
   align-items: center;
+  margin-bottom: 4px;
 }
 
 .tweet-thumbnail {
   width: 110px;
   height: 110px;
   object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+  border: 1px solid #ffd9b3;
+  background: #fff;
+}
+
+/* 詳細ページ用画像 */
+.tweet-image {
+  max-width: 150px;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #ffd9b3;
 }
 
 /* 詳細・編集の画像ブロック */
@@ -158,11 +232,13 @@
 }
 
 .edit-image-block img {
-  border-radius: 8px;
-  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+  border: 1px solid #ffd9b3;
 }
 
-/* フォーム */
+/* ==========================
+   フォーム
+   ========================== */
 .field {
   margin-bottom: 12px;
 }
@@ -170,237 +246,3 @@
 .field label {
   font-size: 13px;
   font-weight: 600;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.field input[type="text"],
-.field input[type="date"],
-.field textarea {
-  width: 100%;
-  border-radius: 6px;
-  border: 1px solid #d0d0d0;
-  padding: 6px 8px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-.field textarea {
-  min-height: 120px;
-}
-
-/* スマホ対応 */
-@media (max-width: 640px) {
-  .app-container {
-    padding: 16px 14px 24px;
-  }
-
-  .tweet-card {
-    grid-template-columns: 1fr;
-  }
-
-  .tweet-images {
-    justify-content: flex-start;
-  }
-}
-.nav-user-name {
-  margin-right: 20px;
-  font-weight: bold;
-}
-
-.nav-login, .nav-signup, .nav-logout {
-  margin-left: 15px;
-  color: blue;
-}
-
-.osanpo-logo {
-  height: 100px;
-  width: auto;
-  display: block;
-}
-
-.tweet-meta-own {
-  font-size: 1.5rem; /* 大きくする */
-  font-weight: bold;
-}
-
-.mypage-container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 24px 16px;
-}
-
-.mypage-header {
-  margin-bottom: 24px;
-  text-align: left;
-}
-
-.mypage-header .page-title {
-  font-size: 1.8rem;
-  margin-bottom: 4px;
-}
-
-.mypage-header .page-subtitle {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 8px;
-}
-
-.mypage-stats {
-  font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 12px;
-}
-
-.mypage-new-btn {
-  margin-top: 4px;
-}
-
-/* 2カラム */
-.mypage-main {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-}
-
-.mypage-left,
-.mypage-right {
-  flex: 1 1 300px;
-}
-
-.section-title {
-  font-size: 1.2rem;
-  margin-bottom: 8px;
-}
-
-/* おさんぽ一覧 */
-.mypage-tweet-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 12px;
-}
-
-.mypage-tweet-item {
-  padding: 6px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.mypage-tweet-item .tweet-date {
-  font-size: 0.85rem;
-  color: #888;
-  margin-right: 8px;
-}
-
-.mypage-tweet-item .tweet-link {
-  font-size: 0.95rem;
-}
-
-/* カレンダー */
-.calendar {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 8px;
-  table-layout: fixed;
-}
-
-.calendar th,
-.calendar td {
-  border: 1px solid #ddd;
-  text-align: center;
-  padding: 4px;
-  height: 56px;
-  vertical-align: top;
-  font-size: 0.85rem;
-}
-
-.calendar th {
-  background: #f7f7f7;
-  font-weight: bold;
-}
-
-.calendar-day.empty {
-  background: #fafafa;
-}
-
-.calendar-day .day-number {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-.calendar-day.has-activity {
-  background: #ffeaa7; /* おさんぽした日をハイライト */
-}
-
-.calendar-day.today {
-  outline: 2px solid #0984e3;
-}
-
-.calendar-day .day-dot {
-  font-size: 1rem;
-  margin-top: 2px;
-}
-
-/* 戻るリンク */
-.mypage-footer-link {
-  margin-top: 24px;
-  text-align: right;
-}
-
-.link-back {
-  font-size: 0.9rem;
-}
-
-.tweet-images {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.tweet-image {
-  border-radius: 8px;
-}
-
-.comment-form {
-  margin-top: 20px;
-}
-
-.comment-textarea {
-  width: 100%;
-  padding: 10px;
-}
-
-.comment-submit {
-  margin-top: 8px;
-  padding: 6px 14px;
-}
-
-.comments {
-  margin-top: 30px;
-}
-
-.comment-item {
-  margin-bottom: 10px;
-}
-
-.user-tweets {
-  list-style: none;
-  padding: 0;
-}
-
-.user-tweet {
-  margin-bottom: 16px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 12px;
-}
-
-.tweet-images {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.tweet-image {
-  max-width: 150px;
-  height: auto;
-  border-radius: 8px;
-}
