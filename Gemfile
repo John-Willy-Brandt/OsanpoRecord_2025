@@ -74,6 +74,9 @@ gem 'image_processing', '~> 1.2'
 gem 'pry-rails'
 group :production do
   gem 'pg'
+gem "aws-sdk-s3", require: false
+
+
 end
 
 gem "aws-sdk-s3", require: false

@@ -12,15 +12,11 @@
       <div class="tweet-main">
         <%= link_to tweet.subject, tweet_path(tweet), class: "tweet-title-link" %>
 
-
-  <% if user_signed_in? && tweet.user_id == current_user.id %>
-  <p class="tweet-meta tweet-meta-own">投稿者：<%= tweet.user.nickname %></p>
-  <% else %>
-  <p class="tweet-meta">投稿者：<%= tweet.user.nickname %></p>
-  <% end %>
-
-
-
+        <% if user_signed_in? && tweet.user_id == current_user.id %>
+          <p class="tweet-meta tweet-meta-own">投稿者：<%= tweet.user.nickname %></p>
+        <% else %>
+          <p class="tweet-meta">投稿者：<%= tweet.user.nickname %></p>
+        <% end %>
 
         <p class="tweet-meta">日付：<%= tweet.activity_date %></p>
       </div>
@@ -47,3 +43,4 @@
     </article>
   <% end %>
 </div>
+

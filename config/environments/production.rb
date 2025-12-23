@@ -2,16 +2,16 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  
   # Code is not reloaded between requests.
   config.enable_reloading = false
-
+  config.hosts << "osanpo.john-watanabe.com"
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
-
+  config.hosts << "13.159.59.87"
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
@@ -37,7 +37,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -96,4 +96,26 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # Mount Action Cable outside main process or domain.
+  # config.action_cable.mount_path = nil
+  # ...
+
+  # ここより上は元々の設定が入っている
+
+  # --- add: disable https redirect in production ---
+  config.force_ssl = false
+  config.ssl_options = { redirect: false, hsts: false } if config.respond_to?(:ssl_options)
+  config.middleware.delete Rack::SSL if defined?(Rack::SSL)
 end
+
+
+
+
+
+
+
+
+
+
+

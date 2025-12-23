@@ -25,11 +25,16 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
 
-    if @tweet.save
-      redirect_to tweets_path
-    else
-      render :new, status: :unprocessable_entity
-    end
+  if @tweet.save
+    Rails.logger.info "★★★ TWEET CREATED! id=#{@tweet.id} ★★★"
+    redirect_to @tweet
+  else
+    Rails.logger.info "★★★ TWEET SAVE FAILED: #{@tweet.errors.full_messages} ★★★"
+    render :new, status: :unprocessable_entity
+  end
+
+
+
   end
 
   def edit; end
