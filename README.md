@@ -1,75 +1,82 @@
-# README
+# OsanpoRecord_2025
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Walking / jogging diary application built with Ruby on Rails.
 
-Things you may want to cover:
+## Production URL
+- https://osanpo.john-watanabe.com/tweets
 
-* Ruby version
+---
 
-* System dependencies
+## Features
+- User authentication (Devise)
+- Create walking / jogging records
+- Attach multiple images to a post (ActiveStorage)
+- Category / duration / intensity / rating using ActiveHash
+- Calendar-based activity date
 
-* Configuration
+---
 
-* Database creation
-* Database creation
-# Table
-## Table: users
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false, unique: true |
-| encrypted_password | string | null: false |
-| family_name        | string | null: false |
-| first_name         | string | null: false |
-| family_name_kana   | string | null: false |
-| first_name_kana    | string | null: false |
-| birthday           | date   | null: false |
+## Tech Stack
+- Ruby: 3.2.0
+- Rails: 7.1.6
+- Database: MySQL
+- Authentication: Devise
+- Storage: Amazon S3 (ActiveStorage)
+- Web Server: Nginx
+- App Server: Puma (systemd)
+- OS: Amazon Linux 2 (AWS EC2)
 
-class User < ApplicationRecord
-  has_many :tweets, dependent: :destroy
-  has_many :comments, dependent: :destroy
-end
+---
 
-## Table: tweets
+## Architecture (Production)
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| subject       | string     | null: false                    | # タイトル
-| text          | text       | null: false                    | # 本文
-| category_id   | integer    | null: false                    | # ランニング / 散歩 / ジョギング (ActiveHash)
-| duration_id   | integer    | null: false                    | # 〜30分, 30〜60分, 60分以上... など ActiveHash
-| intensity_id  | integer    | null: false                    | # （任意）強度：ゆっくり / 普通 / きつい
-| rating_id     | integer    | null: false                    | # （任意）気分：最高 / 普通 / イマイチ など
-| activity_date | date       | null: false                    | # カレンダーの日付
-| user          | references | null: false, foreign_key: true |
+Client (Browser)  
+→ Nginx (HTTPS / Reverse Proxy)  
+→ Puma (127.0.0.1:3000)  
+→ Rails Application  
+→ MySQL  
 
-### Association
+Rails (ActiveStorage)  
+→ Amazon S3  
+(bucket: `osanporecord-2025-images`)
 
-- belongs_to :user
-- has_many_attached :images  # 「some images」に対応
-- has_many :comments, dependent: :destroy## Table: comments
+---
 
-## Table: comments
+## Local Setup
 
-| Column | Type       | Options                         |
-| ------ | ---------- | ------------------------------- |
-| user   | references | null: false, foreign_key: true |
-| tweet  | references | null: false, foreign_key: true |
-| text   | text       | null: false                    |
+```bash
+git clone git@github.com:John-Willy-Brandt/OsanpoRecord_2025.git
+cd OsanpoRecord_2025
+bundle install
+rails db:create db:migrate
+rails s
 
-### Association
+## Operations (EC2)
+ssh -i ~/.ssh/osanpo-rescue ec2-user@13.159.59.87
 
-- belongs_to :tweet
-- belongs_to :user
+### Puma
+```bash
+sudo systemctl status puma
+sudo systemctl restart puma
+sudo journalctl -u puma -n 100 -o cat
 
+### Nginx
 
-* Database initialization
+sudo systemctl status nginx
+sudo systemctl restart nginx
+sudo nginx -t
 
-* How to run the test suite
+## Troubleshooting
 
-* Services (job queues, cache servers, search engines, etc.)
+- 502 Bad Gateway  
+  → Puma stopped / Nginx proxy mismatch
 
-* Deployment instructions
+- 500 unable to sign request without credentials  
+  → AWS_ACCESS_KEY_ID / SECRET missing
 
-* ...
+- Blocked hosts error  
+  → Add domain to production.rb
+
+- server.pid exists  
+  → Remove tmp/pids/server.pid
+
