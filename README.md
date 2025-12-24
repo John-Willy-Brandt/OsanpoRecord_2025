@@ -59,6 +59,19 @@ sudo systemctl status nginx
 sudo systemctl restart nginx
 sudo nginx -t
 
+### Database / SQL Structure
+Database Engine
+
+This application uses different database engines by environment, which is a common 
+ and practical production setup.
+
+| Environment | Database                        |
+| ----------- | ------------------------------- |
+| Development | MySQL                           |
+| Test        | MySQL                           |
+| Production  | PostgreSQL (via `DATABASE_URL`) |
+
+
 ## Troubleshooting
 
 - 502 Bad Gateway  
