@@ -63,6 +63,21 @@ group :development do
   # gem "spring"
 end
 
+group :development, :test do
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+end
+
+group :test do
+  gem "faker"
+  gem "database_cleaner-active_record"
+end
+
+group :test do
+  gem "shoulda-matchers", "~> 6.0"
+end
+
+
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
