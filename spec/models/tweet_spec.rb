@@ -24,5 +24,30 @@ RSpec.describe Tweet, type: :model do
       expect(tweet).to be_invalid
       expect(tweet.errors.full_messages).to include("Activity date can't be blank")
     end
+
+        it "category_id が 1（---）だと無効" do
+      tweet = build(:tweet, category_id: 1)
+      tweet.valid?
+      expect(tweet.errors.full_messages.join).to match(/Category|category/)
+    end
+
+    it "duration_id が 1（---）だと無効" do
+      tweet = build(:tweet, duration_id: 1)
+      tweet.valid?
+      expect(tweet.errors.full_messages.join).to match(/Duration|duration/)
+    end
+
+    it "intensity_id が 1（---）だと無効" do
+      tweet = build(:tweet, intensity_id: 1)
+      tweet.valid?
+      expect(tweet.errors.full_messages.join).to match(/Intensity|intensity/)
+    end
+
+    it "rating_id が 1（---）だと無効" do
+      tweet = build(:tweet, rating_id: 1)
+      tweet.valid?
+      expect(tweet.errors.full_messages.join).to match(/Rating|rating/)
+    end
+
   end
 end
