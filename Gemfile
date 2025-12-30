@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '3.2.0'
@@ -64,19 +66,18 @@ group :development do
 end
 
 group :development, :test do
-  gem "rspec-rails"
-  gem "factory_bot_rails"
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :test do
-  gem "faker"
-  gem "database_cleaner-active_record"
+  gem 'database_cleaner-active_record'
+  gem 'faker'
 end
 
 group :test do
-  gem "shoulda-matchers", "~> 6.0"
+  gem 'shoulda-matchers', '~> 6.0'
 end
-
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
@@ -88,10 +89,8 @@ gem 'devise'
 gem 'image_processing', '~> 1.2'
 gem 'pry-rails'
 group :production do
+  gem 'aws-sdk-s3', require: false
   gem 'pg'
-gem "aws-sdk-s3", require: false
-
-
 end
 
-gem "aws-sdk-s3", require: false
+gem 'aws-sdk-s3', require: false

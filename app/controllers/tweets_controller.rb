@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[show edit update destroy]
   before_action :authorize_tweet!, only: %i[edit update destroy]
@@ -25,16 +27,13 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
 
-  if @tweet.save
-    Rails.logger.info "★★★ TWEET CREATED! id=#{@tweet.id} ★★★"
-    redirect_to @tweet
-  else
-    Rails.logger.info "★★★ TWEET SAVE FAILED: #{@tweet.errors.full_messages} ★★★"
-    render :new, status: :unprocessable_entity
-  end
-
-
-
+    if @tweet.save
+      Rails.logger.info "★★★ TWEET CREATED! id=#{@tweet.id} ★★★"
+      redirect_to @tweet
+    else
+      Rails.logger.info "★★★ TWEET SAVE FAILED: #{@tweet.errors.full_messages} ★★★"
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit; end
