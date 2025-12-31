@@ -29,5 +29,11 @@ RSpec.describe User, type: :model do
       user = build(:user, password: '12345', password_confirmation: '12345')
       expect(user).to be_invalid
     end
+
+    it 'family_name_kana must be katakana' do
+      user = build(:user, family_name_kana: 'やまだ')
+      user.valid?
+      expect(user.errors[:family_name_kana]).to be_present
+    end
   end
 end
