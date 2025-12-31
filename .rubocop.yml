@@ -1,7 +1,6 @@
 require:
   - rubocop-rails
   - rubocop-rspec
-
 AllCops:
   NewCops: enable
   TargetRubyVersion: 3.2
@@ -10,7 +9,6 @@ AllCops:
     - "bin/*"
     - "node_modules/**/*"
     - "vendor/**/*"
-
 RSpec:
   Language:
     Expectations:
