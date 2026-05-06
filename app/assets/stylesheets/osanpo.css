@@ -227,13 +227,15 @@
 /* 詳細・編集の画像ブロック */
 .edit-image-block {
   display: inline-block;
-  margin: 8px 8px 12px 0;
+  margin: 10px;
   text-align: center;
 }
 
-.edit-image-block img {
-  border-radius: 10px;
-  border: 1px solid #ffd9b3;
+.edit-image-block img.edit-preview-image {
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* ==========================
@@ -255,15 +257,3 @@
 }
 
 
-.edit-image-block {
-  display: inline-block;
-  margin: 10px;
-  text-align: center;
-}
-
-.edit-image-block img.edit-preview-image {
-  width: 150px !important;
-  height: 150px !important;
-  object-fit: cover;
-  border-radius: 8px;
-}
